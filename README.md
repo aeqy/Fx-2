@@ -2,16 +2,20 @@
 Clean architecture
 
 ## 清晰的架构分层
-   
-`清晰的分层和职责分离至关重要。Clean Architecture 的基本原则
-（例如，内核层与外部依赖的解耦）依然适用，但具体的实现需要更加严格的规范化。`
 
+> src/
+>> Core/                # 核心业务逻辑（Entities, Aggregates, Interfaces）
+>>> Entities/           # 领域实体（User, Role等）
+>>> Interfaces/        # 核心接口，如仓储接口 (IUserRepository)
 
+>> Application/         # 应用层逻辑（DTOs, Services, Use Cases）
+>>> Services/          # 业务逻辑服务
+>>>UseCases/          # 用例（处理业务逻辑）
 
-### 分层结构：
+>> Infrastructure/      # 基础设施层（实现领域接口，第三方服务集成）
+>>> Identity/          # Identity相关代码，数据库上下文，Identity配置
+>>> Repositories/      # 实现领域仓储接口的具体类
 
-#### 项目结构：展示分层结构和依赖关系。
-##### 领域层（Domain Layer）：定义核心业务逻辑和实体。
-##### 应用层（Application Layer）：定义用例和服务。
-##### 基础设施层（Infrastructure Layer）：配置 OpenIddict 和实现身份验证逻辑。
-##### 接口层（Presentation Layer）：处理用户请求。
+>> WebAPI/              # Web层（控制器，API接口）
+>>> Controllers/       # API控制器（处理HTTP请求）
+>>> Dtos/              # 数据传输对象（前端与后端交互的数据对象）
